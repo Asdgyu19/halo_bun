@@ -72,7 +72,7 @@
             <div class="mt-6 border-t pt-6">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center space-x-4">
-                        <button onclick="likeFaq({{ $faq->id }})" 
+                        <button data-faq-id="{{ $faq->id }}" onclick="likeFaq(this.dataset.faqId)" 
                                 class="flex items-center space-x-2 text-green-600 hover:text-green-700 transition-colors">
                             <i class="fas fa-thumbs-up"></i>
                             <span>Helpful ({{ number_format($faq->like_count) }})</span>
@@ -106,7 +106,7 @@
                        class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg flex items-center text-sm">
                         <i class="fab fa-whatsapp mr-2"></i> WhatsApp
                     </a>
-                    <button onclick="copyToClipboard('{{ request()->fullUrl() }}')"
+                    <button data-url="{{ request()->fullUrl() }}" onclick="copyToClipboard(this.dataset.url)"
                             class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg flex items-center text-sm">
                         <i class="fas fa-link mr-2"></i> Copy
                     </button>

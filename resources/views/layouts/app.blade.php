@@ -91,10 +91,11 @@
         </div>
 
         <nav class="hidden md:flex items-center space-x-6 text-[var(--blue)] font-semibold">
+          <a href="/pregnancy-tracker" class="hover:text-blue-600 transition-colors">Pregnancy Track</a>
           <a href="/articles" class="hover:text-blue-600 transition-colors">Artikel</a>
           <a href="/videos" class="hover:text-blue-600 transition-colors">Video</a>
+          <a href="/threads" class="hover:text-blue-600 transition-colors">Forum Bunda</a>
           <a href="/facilities" class="hover:text-blue-600 transition-colors">Faskes</a>
-          <a href="/faq" class="hover:text-blue-600 transition-colors">FAQ</a>
         </nav>
 
         <div class="flex items-center gap-3">
@@ -105,13 +106,75 @@
             </svg>
           </div>
           @auth
-            @if(auth()->user()->isAdmin())
-              <a href="{{ route('admin.dashboard') }}" class="bg-[var(--yellow)] text-[var(--blue)] font-semibold px-3 py-1.5 rounded-full hover:bg-yellow-300 transition-colors text-sm">Dashboard</a>
-            @endif
-            <form method="POST" action="{{ route('logout') }}" class="inline">
-              @csrf
-              <button type="submit" class="text-blue-600 hover:text-blue-800 font-semibold transition-colors text-sm">Logout</button>
-            </form>
+            {{-- User Profile Dropdown --}}
+            <div class="relative group">
+              <button class="flex items-center space-x-2 text-[var(--blue)] hover:text-blue-600 transition-colors">
+                @if(auth()->user()->avatar)
+                  <img src="{{ asset('storage/' . auth()->user()->avatar) }}" 
+                       alt="Avatar" 
+                       class="w-8 h-8 rounded-full object-cover border-2 border-blue-100">
+                @else
+                  <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white text-sm font-bold">
+                    {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                  </div>
+                @endif
+                <span class="font-semibold text-sm hidden sm:block">Halo, {{ explode(' ', auth()->user()->name)[0] }}</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+              
+              {{-- Dropdown Menu --}}
+              <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                <div class="p-3 border-b border-gray-100">
+                  <div class="flex items-center space-x-3">
+                    @if(auth()->user()->avatar)
+                      <img src="{{ asset('storage/' . auth()->user()->avatar) }}" 
+                           alt="Avatar" 
+                           class="w-10 h-10 rounded-full object-cover border-2 border-blue-100">
+                    @else
+                      <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-bold">
+                        {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                      </div>
+                    @endif
+                    <div>
+                      <p class="font-semibold text-gray-900 text-sm">{{ auth()->user()->name }}</p>
+                      <p class="text-gray-500 text-xs">{{ auth()->user()->email }}</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="py-2">
+                  <a href="{{ route('profile.show') }}" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 transition-colors">
+                    <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                    </svg>
+                    Profile Saya
+                  </a>
+                  
+                  @if(auth()->user()->isAdmin())
+                    <a href="{{ route('admin.dashboard') }}" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 transition-colors">
+                      <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                      </svg>
+                      Dashboard Admin
+                    </a>
+                  @endif
+                  
+                  <div class="border-t border-gray-100 my-2"></div>
+                  
+                  <form method="POST" action="{{ route('logout') }}" class="block">
+                    @csrf
+                    <button type="submit" class="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors text-left">
+                      <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                      </svg>
+                      Logout
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
           @else
             <a href="{{ route('login') }}" class="bg-white text-[var(--blue)] font-semibold px-3 py-1.5 rounded-full border border-gray-300 hover:bg-gray-100 transition-colors text-sm">Masuk</a>
             <a href="{{ route('register') }}" class="bg-[var(--blue)] text-white font-semibold px-3 py-1.5 rounded-full hover:bg-blue-600 transition-colors text-sm">Daftar</a>
@@ -131,10 +194,21 @@
   </main>
 
   <footer class="bg-gray-100 border-t border-gray-200 py-8 px-4 text-sm text-gray-600">
-    <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-6 text-center md:text-left">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-6 text-center md:text-left">
       <div>
         <h4 class="font-bold text-lg text-[var(--blue)] mb-2">HaloBun</h4>
         <p>Solusi dan panduan lengkap untuk perjalanan kehamilan dan pasca melahirkan.</p>
+      </div>
+      <div>
+        <h4 class="font-bold text-lg text-[var(--blue)] mb-2">Navigasi</h4>
+        <ul class="space-y-1">
+          <li><a href="/pregnancy-tracker" class="hover:text-blue-600">Pregnancy Track</a></li>
+          <li><a href="/articles" class="hover:text-blue-600">Artikel</a></li>
+          <li><a href="/videos" class="hover:text-blue-600">Video</a></li>
+          <li><a href="/threads" class="hover:text-blue-600">Forum Bunda</a></li>
+          <li><a href="/facilities" class="hover:text-blue-600">Faskes</a></li>
+          <li><a href="/faq" class="hover:text-blue-600">FAQ</a></li>
+        </ul>
       </div>
       <div>
         <h4 class="font-bold text-lg text-[var(--blue)] mb-2">Kontak Kami</h4>
@@ -156,5 +230,8 @@
       © {{ date('Y') }} HaloBun. All Rights Reserved.
     </div>
   </footer>
+
+   @stack('scripts')
+   
 </body>
 </html>
