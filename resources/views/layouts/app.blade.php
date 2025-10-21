@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ $title ?? 'HaloBun' }}</title>
+  <link rel="icon" type="image/x-icon" href="{{ asset('images/AR.webp') }}">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -99,6 +100,12 @@
         </nav>
 
         <div class="flex items-center gap-3">
+          {{-- Mobile Menu Button --}}
+          <button id="mobile-menu-button" class="md:hidden text-[var(--blue)] hover:text-blue-600 transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
           <div class="relative hidden lg:block">
             <input type="text" placeholder="Pencarian" class="py-1.5 pl-3 pr-8 rounded-full bg-blue-50 text-slate-800 focus:outline-none focus:ring-2 focus:ring-[var(--blue)] text-sm">
             <svg class="w-4 h-4 absolute right-2 top-1/2 -translate-y-1/2 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
@@ -182,6 +189,67 @@
         </div>
       </div>
     </div>
+    
+    {{-- Mobile Menu --}}
+    <div id="mobile-menu" class="md:hidden bg-white border-t border-gray-200 hidden">
+      <div class="px-4 py-3 space-y-3">
+        {{-- Mobile Search --}}
+        <div class="relative">
+          <input type="text" placeholder="Pencarian" class="w-full py-2 pl-3 pr-8 rounded-full bg-blue-50 text-slate-800 focus:outline-none focus:ring-2 focus:ring-[var(--blue)] text-sm">
+          <svg class="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.655l4.635 4.635a1 1 0 01-1.414 1.414l-4.635-4.635A6 6 0 012 8z" clip-rule="evenodd" />
+          </svg>
+        </div>
+        
+        {{-- Mobile Navigation Links --}}
+        <div class="border-t border-gray-100 pt-3 space-y-2">
+          <a href="/pregnancy-tracker" class="block py-2 text-[var(--blue)] font-semibold hover:text-blue-600 transition-colors">
+            <div class="flex items-center space-x-3">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+              </svg>
+              <span>Pregnancy Track</span>
+            </div>
+          </a>
+          
+          <a href="/articles" class="block py-2 text-[var(--blue)] font-semibold hover:text-blue-600 transition-colors">
+            <div class="flex items-center space-x-3">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              </svg>
+              <span>Artikel</span>
+            </div>
+          </a>
+          
+          <a href="/videos" class="block py-2 text-[var(--blue)] font-semibold hover:text-blue-600 transition-colors">
+            <div class="flex items-center space-x-3">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+              </svg>
+              <span>Video</span>
+            </div>
+          </a>
+          
+          <a href="/threads" class="block py-2 text-[var(--blue)] font-semibold hover:text-blue-600 transition-colors">
+            <div class="flex items-center space-x-3">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+              </svg>
+              <span>Forum Bunda</span>
+            </div>
+          </a>
+          
+          <a href="/facilities" class="block py-2 text-[var(--blue)] font-semibold hover:text-blue-600 transition-colors">
+            <div class="flex items-center space-x-3">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+              </svg>
+              <span>Faskes</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
   </header>
 
   <main class="flex-1">
@@ -232,6 +300,41 @@
   </footer>
 
    @stack('scripts')
+   
+   <script>
+   // Mobile Menu Toggle
+   document.addEventListener('DOMContentLoaded', function() {
+     const mobileMenuButton = document.getElementById('mobile-menu-button');
+     const mobileMenu = document.getElementById('mobile-menu');
+     
+     if (mobileMenuButton && mobileMenu) {
+       mobileMenuButton.addEventListener('click', function() {
+         mobileMenu.classList.toggle('hidden');
+         
+         // Toggle icon between hamburger and X
+         const svg = mobileMenuButton.querySelector('svg');
+         if (mobileMenu.classList.contains('hidden')) {
+           // Show hamburger icon
+           svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+         } else {
+           // Show X icon
+           svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
+         }
+       });
+       
+       // Close mobile menu when clicking on a link
+       const mobileLinks = mobileMenu.querySelectorAll('a');
+       mobileLinks.forEach(link => {
+         link.addEventListener('click', function() {
+           mobileMenu.classList.add('hidden');
+           // Reset to hamburger icon
+           const svg = mobileMenuButton.querySelector('svg');
+           svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+         });
+       });
+     }
+   });
+   </script>
    
 </body>
 </html>
