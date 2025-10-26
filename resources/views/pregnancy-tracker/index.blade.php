@@ -408,8 +408,29 @@
                                     {{-- Kolom Gambar --}}
                                     <div class="md:col-span-1 text-center">
                                         <h4 class="text-xl font-semibold text-gray-800">{{ $weekData['title'] }}</h4>
-                                        <div class="w-full h-48 bg-blue-100 rounded-lg flex items-center justify-center my-4">
-                                            <span class="text-blue-500 text-sm">Gambar Perkembangan</span>
+                                        <div class="w-full h-48 bg-white rounded-lg flex items-center justify-center my-4 overflow-hidden">
+                                            @php
+                                                $imageNumber = match($weekNumber) {
+                                                    1 => '1',
+                                                    2 => '2',
+                                                    4 => '3',
+                                                    8 => '4',
+                                                    12 => '5',
+                                                    13 => '6',
+                                                    16 => '7',
+                                                    20 => '8',
+                                                    24 => '9',
+                                                    28 => '10',
+                                                    32 => '11',
+                                                    36 => '12',
+                                                    40 => '13',
+                                                    default => 'default'
+                                                };
+                                            @endphp
+                                            <img src="/images/pregnancy/{{ $imageNumber }}.png" 
+                                                 alt="Perkembangan Minggu {{ $weekNumber }}" 
+                                                 class="object-cover w-full h-full rounded-lg"
+                                                 onerror="this.onerror=null; this.src='/images/pregnancy/default.jpg';">
                                         </div>
                                         <div class="text-center">
                                             <p class="text-base font-medium text-gray-700">Bayi Bunda Seukuran
@@ -498,15 +519,25 @@
             1: { title: "Minggu 1 - Persiapan Tubuh", trimester: "Trimester 1", color: "pink", size: "Sel telur siap dibuahi", weight: "-", development: "Tubuh mempersiapkan diri untuk kehamilan. Ovulasi akan terjadi sekitar 2 minggu dari HPHT.", motherChanges: "Menstruasi berlangsung normal. Tubuh mempersiapkan lapisan rahim untuk kemungkinan kehamilan.", tips: "Mulai konsumsi asam folat, hindari alkohol dan rokok, jaga pola makan sehat." },
             4: { title: "Minggu 4 - Implantasi", trimester: "Trimester 1", color: "pink", size: "Sebesar biji poppy (2mm)", weight: "< 1 gram", development: "Blastokista menempel pada dinding rahim. Sel-sel mulai membelah dengan cepat.", motherChanges: "Mungkin mengalami bercak implantasi, payudara mulai sensitif, mood swing.", tips: "Lakukan tes kehamilan jika terlambat haid. Hindari stres berlebihan." },
             8: { title: "Minggu 8 - Pembentukan Organ", trimester: "Trimester 1", color: "pink", size: "Sebesar buah raspberry (1.6cm)", weight: "1 gram", development: "Organ vital mulai terbentuk. Jantung berdetak, tunas lengan dan kaki muncul.", motherChanges: "Morning sickness mencapai puncak, kelelahan, payudara membesar.", tips: "Makan dalam porsi kecil tapi sering, istirahat cukup, konsumsi vitamin prenatal." },
-            12: { title: "Minggu 12 - Akhir Trimester 1", trimester: "Trimester 1", color: "pink", size: "Sebesar buah jeruk nipis (5-6cm)", weight: "14 gram", development: "Semua organ utama sudah terbentuk. Jari tangan dan kaki terpisah jelas.", motherChanges: "Morning sickness mulai berkurang, energi mulai kembali.", tips: "Waktu yang tepat untuk memberitahu kehamilan ke keluarga dan teman." },
-            16: { title: "Minggu 16 - Jenis Kelamin Terlihat", trimester: "Trimester 2", color: "purple", size: "Sebesar buah alpukat (11cm)", weight: "100 gram", development: "Jenis kelamin mulai dapat terlihat di USG. Sistem saraf berkembang pesat.", motherChanges: "Energi meningkat, morning sickness berkurang, perut mulai membesar.", tips: "Waktu yang baik untuk olahraga ringan dan mulai prenatal yoga." },
-            20: { title: "Minggu 20 - Pertengahan Kehamilan", trimester: "Trimester 2", color: "purple", size: "Sebesar buah pisang (16cm)", weight: "300 gram", development: "Gerakan janin mulai terasa. Rambut halus (lanugo) mulai tumbuh.", motherChanges: "Quickening - gerakan janin pertama kali terasa, nafsu makan meningkat.", tips: "USG detail untuk cek anomali. Mulai persiapkan kamar bayi." },
-            24: { title: "Minggu 24 - Viabilitas", trimester: "Trimester 2", color: "purple", size: "Sebesar buah jagung (30cm)", weight: "600 gram", development: "Paru-paru mulai berkembang. Pendengaran mulai berfungsi.", motherChanges: "Perut semakin membesar, mungkin mengalami sakit punggung.", tips: "Tes glukosa untuk diabetes gestasional. Mulai kelas prenatal." },
-            28: { title: "Minggu 28 - Awal Trimester 3", trimester: "Trimester 3", color: "blue", size: "Sebesar terong (35cm)", weight: "1 kg", development: "Mata mulai bisa membuka dan menutup. Otak berkembang pesat.", motherChanges: "Sesak nafas mulai terasa, kaki mungkin bengkak.", tips: "Mulai hitung gerakan janin, tidur dengan posisi miring kiri." },
-            32: { title: "Minggu 32 - Perkembangan Paru-paru", trimester: "Trimester 3", color: "blue", size: "Sebesar kelapa (40cm)", weight: "1.7 kg", development: "Paru-paru semakin matang. Tulang mengeras kecuali tengkorak.", motherChanges: "Heartburn, susah tidur, sering buang air kecil.", tips: "Siapkan tas persalinan, diskusikan birth plan dengan dokter." },
-            36: { title: "Minggu 36 - Hampir Cukup Bulan", trimester: "Trimester 3", color: "blue", size: "Sebesar melon (46cm)", weight: "2.6 kg", development: "Posisi kepala di bawah. Lemak terakumulasi untuk persiapan lahir.", motherChanges: "Kontraksi Braxton Hicks lebih sering, pernapasan mungkin lebih lega.", tips: "Kontrol rutin lebih sering, persiapan mental untuk persalinan." },
-            40: { title: "Minggu 40 - Siap Lahir", trimester: "Trimester 3", color: "blue", size: "Sebesar semangka (50cm)", weight: "3.2 kg", development: "Janin sudah cukup bulan dan siap dilahirkan. Semua organ sudah matang.", motherChanges: "Kontraksi persalinan bisa dimulai kapan saja.", tips: "Waspada tanda-tanda persalinan, siap ke rumah sakit kapan saja." }
+            12: { title: "Minggu 12 - Akhir Trimester 1", trimester: "Trimester 1", color: "pink", size: "Sebesar buah Kiwi (5-6cm)", weight: "14 gram", development: "Semua organ utama sudah terbentuk. Jari tangan dan kaki terpisah jelas.", motherChanges: "Morning sickness mulai berkurang, energi mulai kembali.", tips: "Waktu yang tepat untuk memberitahu kehamilan ke keluarga dan teman." },
+            16: { title: "Minggu 16 - Jenis Kelamin Terlihat", trimester: "Trimester 2", color: "purple", size: "Sebesar buah Jeruk (11cm)", weight: "100 gram", development: "Jenis kelamin mulai dapat terlihat di USG. Sistem saraf berkembang pesat.", motherChanges: "Energi meningkat, morning sickness berkurang, perut mulai membesar.", tips: "Waktu yang baik untuk olahraga ringan dan mulai prenatal yoga." },
+            20: { title: "Minggu 20 - Pertengahan Kehamilan", trimester: "Trimester 2", color: "purple", size: "Sebesar buah Melon (16cm)", weight: "300 gram", development: "Gerakan janin mulai terasa. Rambut halus (lanugo) mulai tumbuh.", motherChanges: "Quickening - gerakan janin pertama kali terasa, nafsu makan meningkat.", tips: "USG detail untuk cek anomali. Mulai persiapkan kamar bayi." },
+            24: { title: "Minggu 24 - Viabilitas", trimester: "Trimester 2", color: "purple", size: "Sebesar buah Pepaya (30cm)", weight: "600 gram", development: "Paru-paru mulai berkembang. Pendengaran mulai berfungsi.", motherChanges: "Perut semakin membesar, mungkin mengalami sakit punggung.", tips: "Tes glukosa untuk diabetes gestasional. Mulai kelas prenatal." },
+            28: { title: "Minggu 28 - Awal Trimester 3", trimester: "Trimester 3", color: "blue", size: "Sebesar Labu (35cm)", weight: "1 kg", development: "Mata mulai bisa membuka dan menutup. Otak berkembang pesat.", motherChanges: "Sesak nafas mulai terasa, kaki mungkin bengkak.", tips: "Mulai hitung gerakan janin, tidur dengan posisi miring kiri." },
+            32: { title: "Minggu 32 - Perkembangan Paru-paru", trimester: "Trimester 3", color: "blue", size: "Sebesar Melon (40cm)", weight: "1.7 kg", development: "Paru-paru semakin matang. Tulang mengeras kecuali tengkorak.", motherChanges: "Heartburn, susah tidur, sering buang air kecil.", tips: "Siapkan tas persalinan, diskusikan birth plan dengan dokter." },
+            36: { title: "Minggu 36 - Hampir Cukup Bulan", trimester: "Trimester 3", color: "blue", size: "Sebesar Semangka (46cm)", weight: "2.6 kg", development: "Posisi kepala di bawah. Lemak terakumulasi untuk persiapan lahir.", motherChanges: "Kontraksi Braxton Hicks lebih sering, pernapasan mungkin lebih lega.", tips: "Kontrol rutin lebih sering, persiapan mental untuk persalinan." },
+            40: { title: "Minggu 40 - Siap Lahir", trimester: "Trimester 3", color: "blue", size: "Sebesar Semangka (50cm)", weight: "3.2 kg", development: "Janin sudah cukup bulan dan siap dilahirkan. Semua organ sudah matang.", motherChanges: "Kontraksi persalinan bisa dimulai kapan saja.", tips: "Waspada tanda-tanda persalinan, siap ke rumah sakit kapan saja." }
         };
+
+        // Helper function untuk mendapatkan nomor gambar berdasarkan minggu
+        function getImageNumber(week) {
+            const weekImageMap = {
+                1: '1', 2: '2', 4: '3', 8: '4', 12: '5',
+                13: '6', 16: '7', 20: '8', 24: '9', 28: '10',
+                32: '11', 36: '12', 40: '13'
+            };
+            return weekImageMap[week] || 'default';
+        }
 
         // Show week information
         function showWeekInfo(week) {
@@ -535,6 +566,12 @@
                 
                 <div class="grid md:grid-cols-2 gap-8">
                     <div class="space-y-6">
+                        <div class="w-full h-64 bg-white rounded-lg overflow-hidden shadow-sm">
+                            <img src="/images/pregnancy/${getImageNumber(week)}.png" 
+                                 alt="Perkembangan Minggu ${week}" 
+                                 class="w-full h-full object-cover"
+                                 onerror="this.onerror=null; this.src='/images/pregnancy/default.jpg';">
+                        </div>
                         <div>
                             <h4 class="text-lg font-semibold text-gray-900 mb-3">Ukuran Janin:</h4>
                             <p class="text-gray-700 bg-white p-4 rounded-lg border">${data.size}</p>
